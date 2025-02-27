@@ -22,12 +22,25 @@ function fish_prompt
     echo -n "┌──("
     set_color green
     echo -n cyber-green
-    set_color red
-    echo -n "🔐"
+    set_color green
+    echo -n "(🔐)"
     set_color green
     echo -n (hostname)
     set_color cyan
-    echo -n ")-["
+    echo -n ")-"
+
+    # Check if we're in a virtual environment
+    if set -q VIRTUAL_ENV
+        set_color cyan
+        echo -n "("
+        set_color magenta
+        echo -n (basename $VIRTUAL_ENV)
+        set_color cyan
+        echo -n ")-"
+    end
+
+    set_color cyan
+    echo -n "["
     set_color yellow
     echo -n (prompt_pwd)
     set_color cyan
