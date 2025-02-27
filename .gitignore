@@ -1,0 +1,25 @@
+# Fish shell specific
+fish_variables
+fishd.*
+.fish_history
+fish_history
+
+# Environment specific
+.env
+.env.local
+
+# Runtime files
+*.log
+*~
+
+# Local overrides
+conf.d/local.fish
+functions/local/
+
+# Temporary files
+.DS_Store
+*.swp
+*.swo
+
+# Private configuration
+conf.d/private.fish
