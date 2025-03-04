@@ -131,7 +131,7 @@ function fish_prompt
     set_color green
     echo -n cyber-green
     set_color green
-    echo -n "(💎)cachyOS"
+    echo -n "(🌿)cachyOS"
     set_color cyan
     echo -n ")"
 
