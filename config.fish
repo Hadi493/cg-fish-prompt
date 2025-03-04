@@ -117,6 +117,7 @@ end
 alias ll="ls -la"
 alias la="ls -a"
 alias cls="clear"
+alias cn="cleanup"
 
 # Start SSH agent if not already running
 if not pgrep -u $USER ssh-agent >/dev/null
