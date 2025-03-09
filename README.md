@@ -1,35 +1,70 @@
-# Fish Shell Configuration
+# 🌿 Cyber Green Fish Shell
 
-This directory contains my personal Fish shell configuration files.
+A modern, productive Fish shell configuration focused on development workflow and system monitoring.
 
-## Structure
+![Fish Shell Preview](./assets/images/image.png)
 
-- `config.fish` - Main configuration file with core settings
-- `conf.d/nix.fish` - Nix package manager integration
-- `README.md` - This documentation file
+## ⚡ Quick Features
 
-## Features
+- Rich system information dashboard
+- Smart command history search
+- Directory bookmarking system
+- Universal archive extraction
+- Git-aware prompt with status
+- Environment management
 
-- Custom prompt with username, hostname, and directory path
-- Virtual environment indicator in prompt
-- SSH agent configuration
-- Flutter and Ruby paths
-- Custom greeting message
-- Useful aliases:
-  - `ll` for `ls -la`
+## 🎨 Visual Features
 
-## Environment Setup
+- Modern cyberpunk theme with gradients
+- System resource monitoring
+- Clean, informative prompt
+- Status indicators and icons
+- Hardware and software stats
 
-The configuration includes:
-- PATH modifications for Flutter
-- Ruby gems path configuration
-- SSH agent autostart
-- Nix package manager integration
+## 🛠 Core Functions
 
-## Prompt
+| Command    | Description                          | Example                |
+|------------|--------------------------------------|------------------------|
+| `mark`     | Bookmark directory management        | `mark save projects`   |
+| `extract`  | Universal archive extraction         | `extract file.tar.gz`  |
+| `hf`       | Command history search               | `hf git commit`        |
 
-The custom prompt includes:
-- Username and hostname
-- Current directory
-- Virtual environment indicator (when active)
-- Cyan/green/yellow color scheme
+## 🔧 System Integration
+
+- **Package Management**: Nix and Pacman integration
+- **Development**: Flutter and Ruby support
+- **Security**: Automatic SSH agent management
+- **Environment**: Virtual env detection and display
+
+## ⌨️ Custom Aliases
+
+```fish
+ll    → ls -la     # Detailed list
+la    → ls -a      # Show hidden files
+cls   → clear      # Clear screen
+```
+
+## 📊 System Dashboard
+
+Displays:
+- 🖥️ Hardware stats (CPU, GPU, Memory, Disk)
+- 🔧 System info (OS, Kernel, Packages)
+- 🌐 Network status and configuration
+- ⏱️ Time and uptime monitoring
+
+## 🚀 Installation
+
+1. Clone to your fish config directory:
+   ```bash
+   git clone https://github.com/yourusername/fish-config ~/.config/fish
+   ```
+2. Source the configuration:
+   ```fish
+   source ~/.config/fish/config.fish
+   ```
+
+## 📦 Dependencies
+
+- Fish Shell (>= 3.0.0)
+- Git (for prompt features)
+- Standard Unix utilities
