@@ -38,73 +38,58 @@ function fish_greeting
     set -l uptime_info (uptime -p | sed 's/up //')
     set -l network_info (ip -br addr show | awk '$1!="lo" {print $1 ": " $3}')
 
-    # CYBER GREEN ASCII art with enhanced colors
-    set_color 00ff87 # Brighter green for main logo
-    echo -n '                                                                            '
-    echo '
-    ██████╗██╗   ██╗██████╗ ███████╗██████╗    ██████╗ ██████╗ ███████╗███████╗███╗   ██╗ 
-   ██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗  ██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║
-   ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝  ██║  ███╗██████╔╝█████╗  █████╗  ██╔██╗ ██║
-   ██║       ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗  ██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║
-   ╚██████╗   ██║   ██████╔╝███████╗██║  ██║  ╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║
-    ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝    ═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝ '
+    # Enhanced CYBER GREEN ASCII art
+    set_color 00ff87
+    echo "
+    ╔══════════════════════════════════════════════════════════════════════════════════╗
+    ║                                                                                  ║
+    ║   ██████╗██╗   ██╗██████╗ ███████╗██████╗                                        ║
+    ║  ██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗      ▄██████▄  █▄████▄ ▄███████       ║
+    ║  ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝      ██░░░░░██ ██░░░██ ██░░░░░█       ║
+    ║  ██║       ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗      ██░░███░█ ██░░░██ ██░░███        ║
+    ║  ╚██████╗   ██║   ██████╔╝███████╗██║  ██║      ░██████░  ░████░█ ░██████        ║
+    ║   ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝      ░░░░░░    ░░░░░░  ░░░░░░         ║
+    ║                                                                                  ║
+    ║   ██████╗ ██████╗ ███████╗███████╗███╗   ██╗                                     ║
+    ║  ██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║     •:•:•:• SYSTEM •:•:•:•          ║
+    ║  ██║  ███╗██████╔╝█████╗  █████╗  ██╔██╗ ██║     •:•:• INFORMATION •:•:•         ║
+    ║  ██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║                                     ║
+    ║  ╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║        [ CachyOS Linux ]            ║
+    ║   ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝                                     ║
+    ╚══════════════════════════════════════════════════════════════════════════════════╝"
 
-    # Section headers with gradient colors
-    echo "                        ╓──── System Information ────╖"
-    echo
+    # Modern system info display
+    echo (set_color -o 00ffaf)"
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━┓  ┏━━━━━━━━━━━━━━━━━━━━━━━━┓"
+    printf (set_color -o 00ffaf)"    %-12s" "SYSTEM"
+    printf (set_color ff87d7)" ❯ %s\n" (set_color white)"CachyOS Linux"
+    printf (set_color -o 00ffaf)"    %-12s" "KERNEL"
+    printf (set_color ff87d7)" ❯ %s\n" (set_color white)$kernel_ver
+    printf (set_color -o 00ffaf)"    %-12s" "USER"
+    printf (set_color ff87d7)" ❯ %s\n" (set_color white)"$username@"(hostname)
+    # echo (set_color -o 00ffaf)"
+    # ┏━━━━━━━━━━━━━━━━━━━━━━━━┓  ┏━━━━━━━━━━━━━━━━━━━━━━━━┓"
+    printf (set_color -o 00ffaf)"    %-12s" "CPU"
+    printf (set_color 00d7ff)" ❯ %s\n" (set_color white)$cpu_info
+    printf (set_color -o 00ffaf)"    %-12s" "GPU"
+    printf (set_color 00d7ff)" ❯ %s\n" (set_color white)$gpu_info
+    printf (set_color -o 00ffaf)"    %-12s" "MEMORY"
+    printf (set_color 00d7ff)" ❯ %s\n" (set_color white)"$mem_used / $mem_total"
+    # echo (set_color -o 00ffaf)"
+    # ┏━━━━━━━━━━━━━━━━━━━━━━━━┓  ┏━━━━━━━━━━━━━━━━━━━━━━━━┓"
+    printf (set_color -o 00ffaf)"    %-12s" "SHELL"
+    printf (set_color ff5fff)" ❯ %s\n" (set_color white)$shell_info
+    printf (set_color -o 00ffaf)"    %-12s" "DE/WM"
+    printf (set_color ff5fff)" ❯ %s\n" (set_color white)$de_info
+    printf (set_color -o 00ffaf)"    %-12s" "PACKAGES"
+    printf (set_color ff5fff)" ❯ %s\n" (set_color white)"$pkg_count installed"
+    echo (set_color -o 00ffaf)"
+    ┗━━━━━━━━━━━━━━━━━━━━━━━━┛  ┗━━━━━━━━━━━━━━━━━━━━━━━━┛"
 
-    # User and System with enhanced alignment
-    printf "%s%-20s %s│ %s%-40s%s\n" \
-        (set_color ff5f87) "  USER" (set_color 444444) (set_color ffffff) "$username@"(hostname) (set_color normal)
-    printf "%s%-20s %s│ %s%-40s%s\n" \
-        (set_color ff5f87) "  OS" (set_color 444444) (set_color ffffff) "CachyOS Linux" (set_color normal)
-    printf "%s%-20s %s│ %s%-40s%s\n" \
-        (set_color ff5f87) "  KERNEL" (set_color 444444) (set_color ffffff) $kernel_ver (set_color normal)
-    # Hardware section with cyan gradient
+    # Minimal status bar
+    echo (set_color -o 00ff87)"
+    [" (set_color -o ff5fff)"SYSTEM READY" (set_color -o 00ff87)"]  " (set_color white)$current_time
     echo
-    set_color -o 00ffff # Cyan
-    echo "                        ╓──── Hardware Stats ────╖"
-    echo
-    printf "%s%-20s %s│ %s%-40s%s\n" \
-        (set_color 00d7ff) "  CPU" (set_color 444444) (set_color ffffff) $cpu_info (set_color normal)
-    printf "%s%-20s %s│ %s%-40s%s\n" \
-        (set_color 00d7ff) "  GPU" (set_color 444444) (set_color ffffff) $gpu_info (set_color normal)
-    printf "%s%-20s %s│ %s%-40s%s\n" \
-        (set_color 00d7ff) "  MEMORY" (set_color 444444) (set_color ffffff) "Used: $mem_used / Total: $mem_total" (set_color normal)
-    printf "%s%-20s %s│ %s%-40s%s\n" \
-        (set_color 00d7ff) "  DISK" (set_color 444444) (set_color ffffff) $disk_info (set_color normal)
-    # Software section with purple gradient
-    echo
-    set_color -o ff87ff # Purple
-    echo "                        ╓──── Software Info ────╖"
-    echo
-    printf "%s%-20s %s│ %s%-40s%s\n" \
-        (set_color ff87d7) "  DE/WM" (set_color 444444) (set_color ffffff) $de_info (set_color normal)
-    printf "%s%-20s %s│ %s%-40s%s\n" \
-        (set_color ff87d7) "  SHELL" (set_color 444444) (set_color ffffff) $shell_info (set_color normal)
-    printf "%s%-20s %s│ %s%-40s%s\n" \
-        (set_color ff87d7) "  PACKAGES" (set_color 444444) (set_color ffffff) "$pkg_count packages installed" (set_color normal)
-    # Network and Time with green gradient
-    echo
-    set_color -o 87ff87 # Light green
-    echo "                        ╓──── Network & Time ────╖"
-    echo
-    printf "%s%-20s %s│ %s%-40s%s\n" \
-        (set_color 87ff5f) "  NETWORK" (set_color 444444) (set_color ffffff) $network_info (set_color normal)
-    printf "%s%-20s %s│ %s%-40s%s\n" \
-        (set_color 87ff5f) "  UPTIME" (set_color 444444) (set_color ffffff) $uptime_info (set_color normal)
-    printf "%s%-20s %s│ %s%-40s%s\n" \
-        (set_color 87ff5f) "  DATETIME" (set_color 444444) (set_color ffffff) "$current_date $current_time" (set_color normal)
-    # Status line with gradient effect
-    echo
-    set_color -o 00ff87
-    echo -n "                        ["
-    set_color -o yellow
-    echo -n " SYSTEM READY "
-    set_color -o 00ff87
-    echo "]"
-    echo
-    set_color normal
 end
 
 # Add Ruby gems to user paths if directory exists
@@ -126,43 +111,45 @@ end
 # Custom prompt function
 function fish_prompt
     set -l last_status $status
-    set_color cyan
-    echo -n "┌──("
-    set_color green
-    echo -n cyber-green
-    set_color green
-    echo -n "(🌿)cachyOS"
-    set_color cyan
+    set_color 00ffaf
+    echo -n "╭──("
+    set_color 00ff87
+    echo -n "CYBER"
+    set_color ff5fff
+    echo -n "(🌿)"
+    set_color 00ff87
+    echo -n "GREEN"
+    set_color 00ffaf
     echo -n ")"
 
     if set -q VIRTUAL_ENV
-        set_color magenta
-        echo -n "(venv:"(basename $VIRTUAL_ENV)")"
+        set_color ff5fff
+        echo -n " («"(basename $VIRTUAL_ENV)"»)"
     end
 
-    set_color cyan
-    echo -n "["
-    set_color yellow
+    set_color 00ffaf
+    echo -n " ["
+    set_color white
     echo -n (prompt_pwd)
-    set_color cyan
+    set_color 00ffaf
     echo -n "]"
 
     if git rev-parse --git-dir >/dev/null 2>&1
-        set_color cyan
-        echo -n "(git:"(git rev-parse --abbrev-ref HEAD 2>/dev/null)")"
+        set_color ff87d7
+        echo -n " git:("(git rev-parse --abbrev-ref HEAD 2>/dev/null)")"
     end
     echo
 
-    echo -n "└─"
+    echo -n "╰─"
     if test $last_status -eq 0
-        set_color green
+        set_color 00ff87
         echo -n " ✔ "
     else
-        set_color red
+        set_color ff5f5f
         echo -n " ✘ "
     end
-    set_color cyan
-    echo -n "\$ "
+    set_color 00ffaf
+    echo -n "❯ "
     set_color normal
 end
 
