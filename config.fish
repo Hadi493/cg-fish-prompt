@@ -115,7 +115,7 @@ function fish_prompt
     echo -n "╭──("
     set_color 00ff87
     echo -n "CYBER"
-    set_color ff5fff
+    set_color 00ffaf
     echo -n "(🌿)"
     set_color 00ff87
     echo -n "GREEN"
