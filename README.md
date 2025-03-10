@@ -2,7 +2,7 @@
 
 A modern, productive Fish shell configuration focused on development workflow and system monitoring.
 
-![Fish Shell Preview](./assets/images/image2.png)
+![Fish Shell Preview](./assets/images/image3.png)
 
 ## ⚡ Quick Features
 
