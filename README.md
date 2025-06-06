@@ -56,7 +56,7 @@ Displays:
 
 1. Clone to your fish config directory:
    ```bash
-   git clone https://github.com/yourusername/fish-config ~/.config/fish
+   git clone https://github.com/Hadi493/fish-config ~/.config/fish
    ```
 2. Source the configuration:
    ```fish
