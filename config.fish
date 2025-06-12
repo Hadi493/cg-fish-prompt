@@ -1,4 +1,3 @@
-# Check if running as root
 if test (id -u) -eq 0
     set config_file "$HOME/.config/fish/config.fish"
     if test -f "$config_file"
@@ -7,7 +6,6 @@ if test (id -u) -eq 0
 end
 
 
-# Add Flutter to PATH if directory exists
 
 set flutter_path "$HOME/Downloads/flutter_linux_3.27.1-stable/flutter/flutter/bin"
 if test -d "$flutter_path"
@@ -17,7 +15,6 @@ if test -d "$flutter_path"
 end
 
 
-# Custom greeting with ASCII art
 function fish_greeting
     clear
     
@@ -41,7 +38,6 @@ function fish_greeting
     set -l last_status $status
 
 
-    # Enhanced CYBER GREEN ASCII art
     set_color 00ff87
     echo "
     ╔══════════════════════════════════════════════════════════════════════════════════╗
@@ -61,8 +57,6 @@ function fish_greeting
     ║   ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝                                     ║
     ╚══════════════════════════════════════════════════════════════════════════════════╝"
 
-    # Modern system info display
-    # Create a fancy separator line
     set_color -o 00ffaf
     echo "    ╔════════════════════════════ SYSTEM INFORMATION ═════════════════════════════╗"
 
@@ -95,16 +89,12 @@ function fish_greeting
 
     printf (set_color -o 00ffaf)"    %-12s" "PACKAGES"
     printf (set_color ff5fff)" ❯ %s\n" (set_color white)"$pkg_count installed"
-    # echo (set_color -o 00ffaf)"
-    # ┗━══════════════════════════════════════════════════════════════════════════════════════┛"
 
-    # Minimal status bar
     echo (set_color -o 00ff87)"
     [" (set_color -o ff5fff)"SYSTEM READY" (set_color -o 00ff87)"]  " (set_color white)$current_time
     echo
 end
 
-# Add Ruby gems to user paths if directory exists
 set ruby_gem_path "$HOME/.gem/ruby/3.x.x/bin"
 if test -d "$ruby_gem_path"
     set -Ux fish_user_paths $ruby_gem_path $fish_user_paths
@@ -121,11 +111,11 @@ alias sys-upgrade="sudo dnf upgrade"
 alias zi="zed"
 alias zo="zed ."
 alias logout="hyprctl dispatch exit"
-# Start SSH agent if not already running
+
 if not pgrep -u $USER ssh-agent >/dev/null
     eval (ssh-agent -c)
 end
-# Custom prompt function
+
 function fish_prompt
 
     set -l os_name (grep "^NAME=" /etc/os-release | sed 's/NAME=//' | tr -d '"')
@@ -173,26 +163,20 @@ function fish_prompt
     set_color normal
 end
 
-# Cleanup function for when shell exits
 function __on_exit --on-event fish_exit
     if test -n "$SSH_AGENT_PID"
         ssh-agent -k >/dev/null 2>&1
     end
 end
 
-# Directory Bookmarking System
-# ----------------------------
 function mark --description "Bookmark directories for quick navigation"
     set -l bookmark_dir "$HOME/.config/fish/bookmarks"
     
-    # Create bookmark directory if it doesn't exist
     if not test -d $bookmark_dir
         mkdir -p $bookmark_dir
     end
     
-    # Check for arguments
     if test (count $argv) -eq 0
-        # List all existing bookmarks if no arguments provided
         echo (set_color cyan)"Available bookmarks:"(set_color normal)
         
         set -l mark_files (ls -A $bookmark_dir 2>/dev/null)
@@ -210,12 +194,10 @@ function mark --description "Bookmark directories for quick navigation"
         return 0
     end
     
-    # Handle bookmark operations
     set -l command $argv[1]
     
     switch $command
         case "save" "add"
-            # Save current directory with specified name
             if test (count $argv) -lt 2
                 echo (set_color red)"Usage: mark save|add <bookmark_name>"(set_color normal)
                 return 1
@@ -224,12 +206,10 @@ function mark --description "Bookmark directories for quick navigation"
             set -l bookmark_name $argv[2]
             set -l current_dir (pwd)
             
-            # Save bookmark
             echo $current_dir > "$bookmark_dir/$bookmark_name"
             echo (set_color green)"✓ Bookmark '$bookmark_name' saved: "(set_color yellow)"$current_dir"(set_color normal)
             
         case "delete" "remove" "rm"
-            # Remove a bookmark
             if test (count $argv) -lt 2
                 echo (set_color red)"Usage: mark delete|remove|rm <bookmark_name>"(set_color normal)
                 return 1
@@ -246,7 +226,6 @@ function mark --description "Bookmark directories for quick navigation"
             end
             
         case "help"
-            # Show help information
             echo (set_color cyan)"Directory Bookmarking System"(set_color normal)
             echo (set_color green)"Usage:"(set_color normal)
             echo "  mark                     List all bookmarks"
@@ -256,7 +235,6 @@ function mark --description "Bookmark directories for quick navigation"
             echo "  mark help                Show this help information"
             
         case "*"
-            # Try to navigate to the specified bookmark
             set -l bookmark_name $command
             set -l bookmark_file "$bookmark_dir/$bookmark_name"
             
@@ -292,8 +270,6 @@ function mark --description "Bookmark directories for quick navigation"
     end
 end
 
-# Enhanced Command History Search
-# ------------------------------
 function hf --description "Search command history with grep"
     if test (count $argv) -eq 0
         echo (set_color red)"Usage: hf <search term>"(set_color normal)
@@ -304,15 +280,10 @@ function hf --description "Search command history with grep"
     set -l color_on (set_color yellow)
     set -l color_off (set_color normal)
     
-    # Use history command to get history, then grep for the search term with line numbers
-    # Using history command to get history, then grep for the search term with line numbers
-    # Use grep's built-in color functionality to highlight the matches
-    history | grep -n --color=always "$search_term"
+   history | grep -n --color=always "$search_term"
     echo (set_color cyan)"To run a command by number, use: !<number>"(set_color normal)
 end
 
-# Universal Extraction Function
-# ----------------------------
 function extract --description "Extract common archive formats"
     if test (count $argv) -eq 0
         echo (set_color red)"Usage: extract <archive file>"(set_color normal)
@@ -327,12 +298,10 @@ function extract --description "Extract common archive formats"
         return 1
     end
     
-    # Create variable to track success
     set -l success 0
     
     echo (set_color green)"→ Extracting: "(set_color yellow)$archive_file(set_color normal)
     
-    # Extract based on file extension
     switch $archive_file
         case "*.zip"
             if command -v unzip > /dev/null
@@ -392,7 +361,6 @@ function extract --description "Extract common archive formats"
             return 1
     end
     
-    # Report success
     if test $success -eq 1
         echo (set_color green)"✓ Extraction complete: $archive_file"(set_color normal)
     else
@@ -401,7 +369,6 @@ function extract --description "Extract common archive formats"
     end
 end
 
-# Abbreviations for the new functions
 abbr -a m "mark"
 abbr -a md "mark delete"
 abbr -a ms "mark save"
