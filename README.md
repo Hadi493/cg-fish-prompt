@@ -38,9 +38,9 @@ A modern, productive Fish shell configuration focused on development workflow an
 ## ⌨️ Custom Aliases
 
 ```fish
-ll    → ls -la     # Detailed list
-la    → ls -a      # Show hidden files
-cls   → clear      # Clear screen
+ll    → ls -la     
+la    → ls -a      
+cls   → clear      
 ```
 
 ## 📊 System Dashboard
