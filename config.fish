@@ -15,29 +15,30 @@ if test -d "$flutter_path"
 end
 
 
+
 function fish_greeting
+    # শুধুমাত্র ইন্টারেক্টিভ শেলে চালান
+    if not status --is-interactive
+        return
+    end
+
     clear
-    
+
+    # তথ্য সংগ্রহ (যেখানে সম্ভব সহজ ও দ্রুত)
     set -l current_time (date "+%H:%M:%S" 2>/dev/null; or echo "Unknown")
-    set -l current_date (date "+%Y-%m-%d" 2>/dev/null; or echo "Unknown")
+    set -l os_name (grep "^NAME=" /etc/os-release | sed 's/NAME=//' | tr -d '"')
+    set -l kernel_ver (uname -r)
     set -l username (whoami 2>/dev/null; or echo "User")
+    set -l hostname (hostname)
     set -l cpu_info (grep "model name" /proc/cpuinfo | head -n1 | sed 's/^.*: //')
-    set -l mem_total (free -h | awk '/^Mem:/ {print $2}')
     set -l mem_used (free -h | awk '/^Mem:/ {print $3}')
-    set -l disk_info (df -h / | awk 'NR==2 {print $3 "/" $2 " (" $5 ")"}')
-    set -l shell_info (fish --version)
+    set -l mem_total (free -h | awk '/^Mem:/ {print $2}')
     set -l gpu_info (lspci | grep -i 'vga\|3d' | cut -d ':' -f3 | string trim)
     set -l pkg_count (rpm -qa | wc -l)
     set -l de_info $XDG_CURRENT_DESKTOP
-    set -l kernel_ver (uname -r)
-    set -l uptime_info (uptime -p | sed 's/up //')
     set -l network_info (ip -br addr show | string match -rv '^lo' | awk '{print $1 ": " $3}')
 
-    set -l os_name (grep "^NAME=" /etc/os-release | sed 's/NAME=//' | tr -d '"')
-
-    set -l last_status $status
-
-
+    # রং সেটআপ
     set_color 00ff87
     echo "
     ╔══════════════════════════════════════════════════════════════════════════════════╗
@@ -76,22 +77,19 @@ function fish_greeting
     printf (set_color 00d7ff)" ❯ %s\n" (set_color white)"$gpu_info"
 
     printf (set_color -o 00ffaf)"    %-12s" "MEMORY"
-    printf (set_color 00d7ff)" ❯ %s\n" (set_color white)"$mem_used / $mem_total"
+    printf (set_color 00d7ff)" ❯ %s / %s\n" (set_color white)"$mem_used" "$mem_total"
 
     printf (set_color -o 00ffaf)"    %-12s" "NETWORK"
     printf (set_color 00d7ff)" ❯ %s\n" (set_color white)"$network_info"
-
-    printf (set_color -o 00ffaf)"    %-12s" "SHELL"
-    printf (set_color ff5fff)" ❯ %s\n" (set_color white)"$shell_info"
 
     printf (set_color -o 00ffaf)"    %-12s" "DE/WM"
     printf (set_color ff5fff)" ❯ %s\n" (set_color white)"$de_info"
 
     printf (set_color -o 00ffaf)"    %-12s" "PACKAGES"
-    printf (set_color ff5fff)" ❯ %s\n" (set_color white)"$pkg_count installed"
+    printf (set_color ff5fff)" ❯ %s installed\n" (set_color white)"$pkg_count"
 
     echo (set_color -o 00ff87)"
-    [" (set_color -o ff5fff)"SYSTEM READY" (set_color -o 00ff87)"]  " (set_color white)$current_time
+    [ " (set_color -o ff5fff)"SYSTEM READY" (set_color -o 00ff87)"]  " (set_color white)$current_time
     echo
 end
 
