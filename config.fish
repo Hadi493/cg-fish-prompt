@@ -21,7 +21,6 @@ end
 function fish_greeting
     clear
     
-    # Enhanced system information gathering
     set -l current_time (date "+%H:%M:%S" 2>/dev/null; or echo "Unknown")
     set -l current_date (date "+%Y-%m-%d" 2>/dev/null; or echo "Unknown")
     set -l username (whoami 2>/dev/null; or echo "User")
@@ -36,6 +35,9 @@ function fish_greeting
     set -l kernel_ver (uname -r)
     set -l uptime_info (uptime -p | sed 's/up //')
     set -l network_info (ip -br addr show | awk '$1!="lo" {print $1 ": " $3}')
+    set -l os_name (grep "^NAME=" /etc/os-release | sed 's/NAME=//' | tr -d '"')
+
+    set -l last_status $status
 
     set -l os_name (grep "^NAME=" /etc/os-release | sed 's/NAME=//' | tr -d '"')
 
@@ -55,7 +57,7 @@ function fish_greeting
     ║  ██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║     •:•:•:• SYSTEM •:•:•:•          ║
     ║  ██║  ███╗██████╔╝█████╗  █████╗  ██╔██╗ ██║     •:•:• INFORMATION •:•:•         ║
     ║  ██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║                                     ║
-    ║  ╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║        [ $os_name ]                 ║
+    ║  ╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║        [ $os_name ]             ║
     ║   ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝                                     ║
     ╚══════════════════════════════════════════════════════════════════════════════════╝"
 
