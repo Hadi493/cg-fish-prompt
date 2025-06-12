@@ -37,6 +37,8 @@ function fish_greeting
     set -l uptime_info (uptime -p | sed 's/up //')
     set -l network_info (ip -br addr show | awk '$1!="lo" {print $1 ": " $3}')
 
+    set -l os_name (grep "^NAME=" /etc/os-release | sed 's/NAME=//' | tr -d '"')
+
     # Enhanced CYBER GREEN ASCII art
     set_color 00ff87
     echo "
@@ -53,7 +55,7 @@ function fish_greeting
     ║  ██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║     •:•:•:• SYSTEM •:•:•:•          ║
     ║  ██║  ███╗██████╔╝█████╗  █████╗  ██╔██╗ ██║     •:•:• INFORMATION •:•:•         ║
     ║  ██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║                                     ║
-    ║  ╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║        [ Fedora Linux ]             ║
+    ║  ╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║        [ $os_name ]                 ║
     ║   ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝                                     ║
     ╚══════════════════════════════════════════════════════════════════════════════════╝"
 
