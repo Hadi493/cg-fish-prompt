@@ -6,17 +6,16 @@ if test (id -u) -eq 0
     end
 end
 
-# Source CachyOS config if it exists
-set cachyos_config "/usr/share/cachyos-fish-config/cachyos-config.fish"
-if test -f "$cachyos_config"
-    source "$cachyos_config"
-end
 
 # Add Flutter to PATH if directory exists
+
 set flutter_path "$HOME/Downloads/flutter_linux_3.27.1-stable/flutter/flutter/bin"
 if test -d "$flutter_path"
-    set -gx PATH $flutter_path $PATH
+    if not contains $flutter_path $PATH
+        set -gx PATH $flutter_path $PATH
+    end
 end
+
 
 # Custom greeting with ASCII art
 function fish_greeting
@@ -32,7 +31,7 @@ function fish_greeting
     set -l disk_info (df -h / | awk 'NR==2 {print $3 "/" $2 " (" $5 ")"}')
     set -l shell_info (fish --version)
     set -l gpu_info (lspci | grep -i 'vga\|3d' | cut -d ':' -f3 | string trim)
-    set -l pkg_count (pacman -Q | wc -l)
+    set -l pkg_count (rpm -qa | wc -l)
     set -l de_info $XDG_CURRENT_DESKTOP
     set -l kernel_ver (uname -r)
     set -l uptime_info (uptime -p | sed 's/up //')
@@ -54,7 +53,7 @@ function fish_greeting
     ║  ██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║     •:•:•:• SYSTEM •:•:•:•          ║
     ║  ██║  ███╗██████╔╝█████╗  █████╗  ██╔██╗ ██║     •:•:• INFORMATION •:•:•         ║
     ║  ██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║                                     ║
-    ║  ╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║        [ CachyOS Linux ]            ║
+    ║  ╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║        [ Fedora Linux ]             ║
     ║   ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝                                     ║
     ╚══════════════════════════════════════════════════════════════════════════════════╝"
 
@@ -63,7 +62,7 @@ function fish_greeting
     set_color -o 00ffaf
     echo "    ╔════════════════════════════ SYSTEM INFORMATION ═════════════════════════════╗"
     printf (set_color -o 00ffaf)"    %-12s" "SYSTEM"
-    printf (set_color ff87d7)" ❯ %s\n" (set_color white)"CachyOS Linux"
+    printf (set_color ff87d7)" ❯ %s\n" (set_color white)"Fedora Linux"
     printf (set_color -o 00ffaf)"    %-12s" "KERNEL"
     printf (set_color ff87d7)" ❯ %s\n" (set_color white)$kernel_ver
     printf (set_color -o 00ffaf)"    %-12s" "USER"
@@ -101,23 +100,31 @@ end
 alias ll="ls -la"
 alias la="ls -a"
 alias cls="clear"
-
+alias nv="nvim"
+alias vi="nvim"
+alias toc="touch"
+alias sys-upgrade="sudo dnf upgrade"
+alias zi="zed"
+alias zo="zed ."
+alias logout="hyprctl dispatch exit"
 # Start SSH agent if not already running
 if not pgrep -u $USER ssh-agent >/dev/null
     eval (ssh-agent -c)
 end
-
 # Custom prompt function
 function fish_prompt
+
+    set -l os_name (grep "^NAME=" /etc/os-release | sed 's/NAME=//' | tr -d '"')
+
     set -l last_status $status
     set_color 00ffaf
     echo -n "╭──("
     set_color 00ff87
-    echo -n "CYBER"
+    echo -n "$USER"
     set_color 00ffaf
     echo -n "(🌿)"
     set_color 00ff87
-    echo -n "GREEN"
+    echo -n "$os_name"
     set_color 00ffaf
     echo -n ")"
 
@@ -128,7 +135,7 @@ function fish_prompt
 
     set_color 00ffaf
     echo -n " ["
-    set_color white
+    set_color 00ffaf
     echo -n (prompt_pwd)
     set_color 00ffaf
     echo -n "]"
