@@ -34,12 +34,12 @@ function fish_greeting
     set -l de_info $XDG_CURRENT_DESKTOP
     set -l kernel_ver (uname -r)
     set -l uptime_info (uptime -p | sed 's/up //')
-    set -l network_info (ip -br addr show | awk '$1!="lo" {print $1 ": " $3}')
+    set -l network_info (ip -br addr show | string match -rv '^lo' | awk '{print $1 ": " $3}')
+
     set -l os_name (grep "^NAME=" /etc/os-release | sed 's/NAME=//' | tr -d '"')
 
     set -l last_status $status
 
-    set -l os_name (grep "^NAME=" /etc/os-release | sed 's/NAME=//' | tr -d '"')
 
     # Enhanced CYBER GREEN ASCII art
     set_color 00ff87
@@ -65,24 +65,34 @@ function fish_greeting
     # Create a fancy separator line
     set_color -o 00ffaf
     echo "    ╔════════════════════════════ SYSTEM INFORMATION ═════════════════════════════╗"
+
     printf (set_color -o 00ffaf)"    %-12s" "SYSTEM"
-    printf (set_color ff87d7)" ❯ %s\n" (set_color white)"Fedora Linux"
+    printf (set_color ff87d7)" ❯ %s\n" (set_color white)"$os_name"
+
     printf (set_color -o 00ffaf)"    %-12s" "KERNEL"
-    printf (set_color ff87d7)" ❯ %s\n" (set_color white)$kernel_ver
+    printf (set_color ff87d7)" ❯ %s\n" (set_color white)"$kernel_ver"
+
     printf (set_color -o 00ffaf)"    %-12s" "USER"
-    printf (set_color ff87d7)" ❯ %s\n" (set_color white)"$username@"(hostname)
+    printf (set_color ff87d7)" ❯ %s\n" (set_color white)"$username@$hostname"
+
     printf (set_color -o 00ffaf)"    %-12s" "CPU"
-    printf (set_color 00d7ff)" ❯ %s\n" (set_color white)$cpu_info
+    printf (set_color 00d7ff)" ❯ %s\n" (set_color white)"$cpu_info"
+
     printf (set_color -o 00ffaf)"    %-12s" "GPU"
-    printf (set_color 00d7ff)" ❯ %s\n" (set_color white)$gpu_info
+    printf (set_color 00d7ff)" ❯ %s\n" (set_color white)"$gpu_info"
+
     printf (set_color -o 00ffaf)"    %-12s" "MEMORY"
     printf (set_color 00d7ff)" ❯ %s\n" (set_color white)"$mem_used / $mem_total"
+
     printf (set_color -o 00ffaf)"    %-12s" "NETWORK"
-    printf (set_color 00d7ff)" ❯ %s\n" (set_color white)(ip -br addr show wlan0 2>/dev/null | awk '{print $3}' | cut -d'/' -f1; or echo "Not connected")
+    printf (set_color 00d7ff)" ❯ %s\n" (set_color white)"$network_info"
+
     printf (set_color -o 00ffaf)"    %-12s" "SHELL"
-    printf (set_color ff5fff)" ❯ %s\n" (set_color white)$shell_info
+    printf (set_color ff5fff)" ❯ %s\n" (set_color white)"$shell_info"
+
     printf (set_color -o 00ffaf)"    %-12s" "DE/WM"
-    printf (set_color ff5fff)" ❯ %s\n" (set_color white)$de_info
+    printf (set_color ff5fff)" ❯ %s\n" (set_color white)"$de_info"
+
     printf (set_color -o 00ffaf)"    %-12s" "PACKAGES"
     printf (set_color ff5fff)" ❯ %s\n" (set_color white)"$pkg_count installed"
     # echo (set_color -o 00ffaf)"
