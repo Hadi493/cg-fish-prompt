@@ -31,7 +31,6 @@ A modern, productive Fish shell configuration focused on development workflow an
 
 ## 🔧 System Integration
 
-- **Package Management**: Nix and Pacman integration
 - **Development**: Flutter and Ruby support
 - **Security**: Automatic SSH agent management
 - **Environment**: Virtual env detection and display
