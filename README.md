@@ -38,9 +38,17 @@ A modern, productive Fish shell configuration focused on development workflow an
 ## ⌨️ Custom Aliases
 
 ```fish
-ll    → ls -la     
-la    → ls -a      
-cls   → clear      
+ll          → ls -la     
+la          → ls -a      
+cls         → clear
+nv          → nvim
+vi          → nvim
+toc         → touch
+sys-upgrade → sudo dnf upgrade
+zi          → zed
+zo          → zed .
+logout      → hyprctl dispatch exit
+
 ```
 
 ## 📊 System Dashboard
