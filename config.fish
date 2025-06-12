@@ -29,7 +29,7 @@ function fish_greeting
     set -l os_name (grep "^NAME=" /etc/os-release | sed 's/NAME=//' | tr -d '"')
     set -l kernel_ver (uname -r)
     set -l username (whoami 2>/dev/null; or echo "User")
-    set -l hostname (hostname)
+    set -l host_name (hostname)
     set -l cpu_info (grep "model name" /proc/cpuinfo | head -n1 | sed 's/^.*: //')
     set -l mem_used (free -h | awk '/^Mem:/ {print $3}')
     set -l mem_total (free -h | awk '/^Mem:/ {print $2}')
@@ -68,7 +68,7 @@ function fish_greeting
     printf (set_color ff87d7)" ❯ %s\n" (set_color white)"$kernel_ver"
 
     printf (set_color -o 00ffaf)"    %-12s" "USER"
-    printf (set_color ff87d7)" ❯ %s\n" (set_color white)"$username@$hostname"
+    printf (set_color ff87d7)" ❯ %s\n" (set_color white)"$username@$host_name"
 
     printf (set_color -o 00ffaf)"    %-12s" "CPU"
     printf (set_color 00d7ff)" ❯ %s\n" (set_color white)"$cpu_info"
