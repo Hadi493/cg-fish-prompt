@@ -17,14 +17,12 @@ end
 
 
 function fish_greeting
-    # শুধুমাত্র ইন্টারেক্টিভ শেলে চালান
     if not status --is-interactive
         return
     end
 
     clear
 
-    # তথ্য সংগ্রহ (যেখানে সম্ভব সহজ ও দ্রুত)
     set -l current_time (date "+%H:%M:%S" 2>/dev/null; or echo "Unknown")
     set -l os_name (grep "^NAME=" /etc/os-release | sed 's/NAME=//' | tr -d '"')
     set -l kernel_ver (uname -r)
@@ -38,7 +36,6 @@ function fish_greeting
     set -l de_info $XDG_CURRENT_DESKTOP
     set -l network_info (ip -br addr show | string match -rv '^lo' | awk '{print $1 ": " $3}')
 
-    # রং সেটআপ
     set_color 00ff87
     echo "
     ╔══════════════════════════════════════════════════════════════════════════════════╗
@@ -54,7 +51,7 @@ function fish_greeting
     ║  ██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║     •:•:•:• SYSTEM •:•:•:•          ║
     ║  ██║  ███╗██████╔╝█████╗  █████╗  ██╔██╗ ██║     •:•:• INFORMATION •:•:•         ║
     ║  ██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║                                     ║
-    ║  ╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║        [ $os_name ]             ║
+    ║  ╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║        [ $os_name ]                   ║
     ║   ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝                                     ║
     ╚══════════════════════════════════════════════════════════════════════════════════╝"
 
@@ -105,7 +102,7 @@ alias cls="clear"
 alias nv="nvim"
 alias vi="nvim"
 alias toc="touch"
-alias sys-upgrade="sudo dnf upgrade"
+alias sys-upgrade="sudo dnf upgrade -y"
 alias zi="zed"
 alias zo="zed ."
 alias logout="hyprctl dispatch exit"
