@@ -63,7 +63,7 @@ Displays:
 
 1. Clone to your fish config directory:
    ```bash
-   git clone https://github.com/Hadi493/fish-config ~/.config/fish
+   https://github.com/Hadi493/Fish-Terminal-Customize.git ~/.config/fish/
    ```
 2. Source the configuration:
    ```fish
