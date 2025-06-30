@@ -8,4 +8,4 @@ A fresh, clean, and personalized terminal prompt
 - fastfetch
 
 
-## ***Please check the `config.fish` file and customize it according to your***
+## ***Please check the `config.fish` file and customize `aliases` according to your***
