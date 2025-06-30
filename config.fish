@@ -9,19 +9,14 @@ alias nv="nvim"
 alias vi="nvim"
 alias hx="helix"
 alias toc="touch"
+
+# Custom Aliases
 alias sys-upgrade="sudo pacman -Sy && sudo pacman -Syu -y"
 alias sym-upgrade="sudo pacman -Syyu"
 alias full-sys-upgrade="sudo pacman -Sy && sudo pacman -Syu -y && paru -Sy && paru -Syu -y && yay -Sy && yay -Syu -y"
-alias zi="zed"
-alias zi="zed"
-alias zo="zed ."
-alias tw="~/toggle-waybar.sh"
-alias logout="hyprctl dispatch exit"
 alias pacman="sudo pacman"
 
 
-
-# OS name set globally
 set -g os_name (string replace 'NAME=' '' (grep '^NAME=' /etc/os-release) | string trim --chars='"')
 
 # fish prompt
@@ -37,7 +32,8 @@ function fish_prompt
     echo -n "$os_name"
     set_color 00ffaf
     echo -n ")"
-
+    
+    # Virtua env 
     if set -q VIRTUAL_ENV
         set_color ff5fff
         echo -n " ("(basename $VIRTUAL_ENV)")"
@@ -49,7 +45,8 @@ function fish_prompt
     echo -n (prompt_pwd)
     set_color 00ffaf
     echo -n "]"
-
+    
+    # git branch
     if git rev-parse --git-dir >/dev/null 2>&1
         set_color ff87d7
         echo -n " git:("(git rev-parse --abbrev-ref HEAD 2>/dev/null)")"
