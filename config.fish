@@ -20,7 +20,9 @@ alias logout="hyprctl dispatch exit"
 alias pacman="sudo pacman"
 
 
-set -l os_name (grep "^NAME=" /etc/os-release | sed 's/NAME=//' | tr -d '"')
+
+# OS name set globally
+set -g os_name (string replace 'NAME=' '' (grep '^NAME=' /etc/os-release) | string trim --chars='"')
 
 # fish prompt
 function fish_prompt
