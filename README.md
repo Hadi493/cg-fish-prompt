@@ -24,9 +24,10 @@ source ~/.config/fish/config.fish
 ```
 
 ### ⚠️ Important: Customize Your Aliases
+Please make sure to review the config.fish file and update the aliases according to your Linux distribution.
+Note: Default aliases are pre-configured for Arch-based systems.
 
-    Please make sure to review the config.fish file and update the aliases according to your Linux distribution.
-    Note: Default aliases are pre-configured for Arch-based systems.### Aliases 
+### Custom Aliases 
 
 For Debian
 ```bash 
