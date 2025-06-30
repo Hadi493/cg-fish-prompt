@@ -23,4 +23,17 @@ source
 source ~/.config/fish/config.fish
 ```
 
-## ***Please check the `config.fish` file and customize `aliases` according to your***
+## ***Please check the `config.fish` file and customize `aliases` according to your*** (default aliases for archlinux)
+### Aliases 
+
+For Debian
+```bash 
+alias sys-upgrade="sudo apt update && sudo apt upgrade -y"
+alias apt="sudo apt"
+```
+
+For Fedora
+```bash
+alias sys-upgrade="sudo dnf upgrade -y"
+alias dnf="sudo dnf"
+```
