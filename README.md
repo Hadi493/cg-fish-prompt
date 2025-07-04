@@ -1,37 +1,47 @@
-# Cyber Green Fish Prompt 
-
-A fresh, clean, and personalized terminal prompt
+# **Cyber Green Fish Prompt** **(cg-fish)**
+A fresh, clean, and personalized `fish-terminal` prompt
 
 ### Requarements
 - Any Linux distro (I personally use CachyOS)
-- Fish Shell
-- fastfetch
+- Fish terminal
+- Fastfetch
 
 ### Usage
+Backup and remove old-config
 
-Backup and remove config
 ```bash
-mkdir -p ~/fish.bak 
+mkdir -p ~/fish.bak
 cp ~/.config/fish/* -r ~/fish.bak
 rm -rf ~/.config/fish
 ```
-Clone 
+
+Clone
 ```bash
-git clone https://github.com/Hadi493/cg-fish.git ~/.config/fish/ 
+git clone https://github.com/Hadi493/cg-fish.git ~/.config/fish/
 ```
+
 source
 ```bash
 source ~/.config/fish/config.fish
 ```
 
+
 ### ⚠️ Important: Customize Your Aliases
-Please make sure to review the config.fish file and update the aliases according to your Linux distribution.
+Please make sure to review the ***[config.fish](./config.fish)*** file and update the aliases according to your Linux distribution.
 Note: Default aliases are pre-configured for Arch-based systems.
 
-### Custom Aliases 
 
+### Customize aliases
+nvim
+```bash
+nvim ~/.config/fish/config.fish
+```
+
+
+### Custom Aliases
 For Debian
-```bash 
+
+```bash
 alias sys-upgrade="sudo apt update && sudo apt upgrade -y"
 alias apt="sudo apt"
 ```
