@@ -9,7 +9,9 @@ alias nv="nvim"
 alias vi="nvim"
 alias hx="helix"
 alias toc="touch"
-alias git_grapg="git log --graph --oneline --decorate --all"
+alias git_graph="git log --graph --oneline --decorate --all"
+alias g_graph="git log --graph --pretty=format:'%C(auto)%h%d %s %C(blue)<%an>' --all"
+alias gb_graph="git log --graph --abbrev-commit --decorate --all --format=format:'%C(bold blue)%h%C(reset) - %C(dim white)%an%C(reset) %C(bold yellow)%d%C(reset)%n''%C(white)%s%C(reset)' --date=short"
 
 # Custom Aliases
 alias sys-upgrade="sudo pacman -Sy && sudo pacman -Syu -y"
