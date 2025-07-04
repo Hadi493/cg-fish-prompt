@@ -12,6 +12,7 @@ A fresh, clean, and personalized terminal prompt
 Backup and remove config
 ```bash
 mkdir -p ~/fish.bak 
+cp ~/.config/fish/* -r ~/fish.bak
 rm -rf ~/.config/fish
 ```
 Clone 
