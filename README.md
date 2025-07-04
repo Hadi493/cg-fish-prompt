@@ -1,4 +1,4 @@
-# **Cyber Green Fish Prompt** **(cg-fish)**
+# **Cyber Green Fish Prompt** **(cg-fp)**
 A fresh, clean, and personalized `fish-terminal` prompt
 
 ### Requarements
