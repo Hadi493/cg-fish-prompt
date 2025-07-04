@@ -25,6 +25,11 @@ source
 source ~/.config/fish/config.fish
 ```
 
+### Aliases 
+```bash
+ll, la, cls, git_graph, g_graph, gb_graph.
+sys-upgrade, full-sys-upgrade
+```
 
 ### ⚠️ Important: Customize Your Aliases
 Please make sure to review the ***[config.fish](./config.fish)*** file and update the aliases according to your Linux distribution.
