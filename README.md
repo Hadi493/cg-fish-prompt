@@ -1,9 +1,9 @@
 # **Cyber Green Fish Prompt** **(cg-fp)**
-A fresh, clean, and personalized `fish-terminal` prompt
+A fresh, clean, and personalized `fish-shell` prompt
 
 ### Requarements
 - Any Linux distro (I personally use CachyOS)
-- Fish terminal
+- Fish shell 
 - Fastfetch
 
 ### Usage
@@ -26,7 +26,7 @@ source ~/.config/fish/config.fish
 ```
 
 ### Aliases 
-```bash
+```
 ll, la, cls, git_graph, g_graph, gb_graph.
 sys-upgrade, full-sys-upgrade
 ```
