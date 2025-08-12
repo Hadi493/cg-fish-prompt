@@ -188,21 +188,22 @@ alias la="ls -a"
 alias l="ls -CF"
 alias cls="clear"
 alias c="clear"
+alias cleanup="pacman -Sc && pacman -Scc"
 alias toc="touch"
-alias mkdir="mkdir -pv"  # Create parent directories and be verbose
+alias md="mkdir -pv"  # Create parent directories and be verbose
 alias cp="cp -i"         # Interactive copy
 alias mv="mv -i"         # Interactive move
 alias rm="rm -i"         # Interactive remove
 alias logout="hyprctl dispatch exit"
 
+
+# yt-dlp
+alias dv="yt-dlp --no-playlist"
+
 # Editor aliases
 alias nv="nvim"
-alias vi="nvim"
-alias vim="nvim"
 alias hx="helix"
-alias em="emacs"
-alias emacs-gui="emacs &"
-alias emacs-term="emacs -nw"
+alias et="emacs -nw"
 
 # Git aliases
 alias g="git"
@@ -212,8 +213,10 @@ alias gp="git push"
 alias gl="git pull"
 alias gs="git status"
 alias gd="git diff"
-alias gb="git branch"
 alias gco="git checkout"
+alias gacp='git add . && git commit -m "..." && git push'
+alias done="gacp"
+
 alias git_graph="git log --graph --oneline --decorate --all"
 alias g_graph="git log --graph --pretty=format:'%C(auto)%h%d %s %C(blue)</%an>' --all"
 alias gb_graph="git log --graph --abbrev-commit --decorate --all --format=format:'%C(bold blue)%h%C(reset) - %C(dim white)%an%C(reset) %C(bold yellow)%d%C(reset)%n''%C(white)%s%C(reset)' --date=short"
@@ -239,8 +242,7 @@ alias sys-upgrade="sudo pacman -Sy && sudo pacman -Syu -y"
 alias sym-upgrade="sudo pacman -Syyu"
 alias full-sys-upgrade="sudo pacman -Sy && sudo pacman -Syu -y && paru -Sy && paru -Syu -y && yay -Sy && yay -Syu -y"
 alias pacman="sudo pacman"
-alias wallpaper="wallpaper-changer"
-alias set-wallpaper="wallpaper-changer"
+alias set-wallpaper="feh --bg-fill"
 
 set -g os_name (string replace 'NAME=' '' (grep '^NAME=' /etc/os-release) | string trim --chars='"')
 
